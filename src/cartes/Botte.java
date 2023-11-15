@@ -1,5 +1,7 @@
 package cartes;
 
+import java.util.Iterator;
+
 import jeu.Joueur;
 
 public class Botte extends Probleme {
@@ -30,16 +32,21 @@ public class Botte extends Probleme {
 	
 	@Override
 	public boolean appliquer(Joueur j) {
-		boolean sortie = false;
-		j.getBotteList().add(this);
-		for(Carte c:j.getBataillePile()) {
-			//Si c'est une attaque du même type que la botte on l'enleve
-			if (c instanceof Attaque && ((Attaque) c).getType().equals(this.getType())) {
-				j.getBataillePile().remove(c);
-				sortie = true;
-			}
-		}
-		return sortie;
+	    boolean sortie = false;
+	    j.getBotteList().add(this);
+	    
+	    Iterator<Bataille> iterator = j.getBataillePile().iterator();
+	    while (iterator.hasNext()) {
+	        Carte c = iterator.next();
+	        
+	        // Si c'est une attaque du même type que la botte on l'enlève
+	        if (c instanceof Attaque && ((Attaque) c).getType().equals(this.getType())) {
+	            iterator.remove();
+	            sortie = true;
+	        }
+	    }
+	    
+	    return sortie;
 	}
 
 }
