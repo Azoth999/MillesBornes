@@ -6,13 +6,7 @@ import java.util.Stack;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import cartes.Bataille;
-import cartes.Borne;
-import cartes.Botte;
-import cartes.Carte;
-import cartes.FinLimite;
-import cartes.Limite;
-import cartes.Parade;
+import cartes.*;
 
 public class Joueur {
 	private String nom;
@@ -24,7 +18,8 @@ public class Joueur {
 	private Stack<Bataille> bataillePile;
 	private Jeu jeu;
 	
-	public Joueur(String nom) {
+	public Joueur(String nom, List<Carte> pileLimitesVitesse, List<Carte> pileBataille, List<Carte> collectionBornes,
+			List<Carte> ensembleBottes) {
 		this.nom = nom;
 		this.km = 0;
 		this.main =  new MainAsList();
@@ -67,54 +62,51 @@ public class Joueur {
 		return this.toString().equals(joueur.toString());				
 	}
 	
-	public void donner(Carte carte) {
-		main.prendre(carte);
-	}
-	
 	public MainAsList getMain() {
 		return this.main;
 	}
 	
-	//Bizzare qu'on nous demande de faire sur une List<Carte> et pas sabot
+	public void donner(Carte carte) {
+		main.prendre(carte);
+	}
+	
 	public Carte prendreCarte(List<Carte> sabot) {
-		if (sabot.isEmpty()) {
+		if (!sabot.isEmpty()) {
+			Carte carte = sabot.remove(0);
+			donner(carte);
+			return carte;
+		} else {
 			return null;
 		}
-		Carte carte = sabot.remove(0);
-		if(carte instanceof Borne) {
-			borneList.add((Borne) carte);
-		}
-		donner(carte);
-		return carte;
 	}
 	
 	public int getKm() {
 		return this.km;
 	}
 	
-	public boolean verifKm() {
-		int kmBorne = 0;
-		for(Borne b:borneList) {
-			kmBorne += b.getKm();
-		}
-		return this.getKm() == kmBorne;
-	}
+	public void ajouterKM(int kilom) {
+        km += kilom;
+    }
 	
-	public int getLimite() {
-		if( limitPile.isEmpty() || limitPile.peek() instanceof FinLimite) {
+	public void jouerBorne(Borne borne) {
+        ajouterKM(borne.getKm());
+    }
+	
+	public int getlimite() {
+		if(limitPile.isEmpty()) {
 			return 200;
 		}
-		//Il doit y avoir mieux
-		for(Botte b:botteList) {
-			if (b.toString().equals("Véhicule prioritaire")) {
-				return 200;
-			}
+		Carte sommetPile = limitPile.get(limitPile.size() - 1);
+		if(sommetPile instanceof FinLimite) {
+			return 200;
 		}
+		if (botteList.stream().anyMatch(carte -> carte instanceof Botte && ((Botte) carte).getType() == Probleme.Type.FEU)) {
+	        return 200;
+	    }
 		return 50;
 	}
 	
 
-	//Je sais pas si c'est bien opti
 	public boolean containTypeBotte() {
 		Bataille bataille = bataillePile.peek();
 		for(Botte b:botteList) {
@@ -132,7 +124,6 @@ public class Joueur {
 				prioritaire = true;
 			}
 		}
-		//Pas d'opti
 		return !((bataillePile.isEmpty() && prioritaire) ||
 				(bataillePile.peek().toString().equals("Feu vert")) ||
 				(bataillePile.peek() instanceof Parade && prioritaire) ||
@@ -141,7 +132,6 @@ public class Joueur {
 	}
 	
 	
-	//J'ai modifié pour que la classe prenne en parametre une classe MainAsList et non Main
 	public Set<Coup> coupsPossibles(List<Joueur> participants){
 		Set<Coup> coupsPossibles = new HashSet<>();
 		

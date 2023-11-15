@@ -38,8 +38,6 @@ public class Botte extends Probleme {
 	    Iterator<Bataille> iterator = j.getBataillePile().iterator();
 	    while (iterator.hasNext()) {
 	        Carte c = iterator.next();
-	        
-	        // Si c'est une attaque du même type que la botte on l'enlève
 	        if (c instanceof Attaque && ((Attaque) c).getType().equals(this.getType())) {
 	            iterator.remove();
 	            sortie = true;

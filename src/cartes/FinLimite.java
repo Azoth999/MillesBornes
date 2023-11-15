@@ -13,19 +13,4 @@ public class FinLimite extends Limite {
 	public String toString() {
 		return "Fin limite";
 	}
-
-	@Override
-	public boolean appliquer(Joueur j) {
-		for(Botte b : j.getBotteList()) {
-			//Si il a une botte prioritaire
-			if (b.getType().equals(Type.FEU)) {
-				return false;
-			}
-		}
-		if (j.getLimite()==50) {
-			j.getLimitePile().add(this);
-			return true;
-		}
-		return false;
-	}
 }

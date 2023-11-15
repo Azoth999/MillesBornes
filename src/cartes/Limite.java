@@ -9,21 +9,6 @@ public class Limite extends Carte {
 		super(nbr);
 	}
 	
-	@Override
-	public boolean appliquer(Joueur j) {
-		if (j.getLimite() == 50) {
-			return false;
-		}
-		for(Botte b : j.getBotteList()) {
-			//Si il a une botte prioritaire
-			if (b.getType().equals(Type.FEU)) {
-				return false;
-			}
-		}
-		j.getLimitePile().add(this);
-		return true;
-	}
-	
 	
 
 }

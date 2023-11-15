@@ -17,9 +17,6 @@ public abstract class Carte {
 		this.nombre = nombre;
 	}
 	
-	
-	
-	
 	@Override
 	public boolean equals(Object carte) {
 		if (carte instanceof Carte) {
