@@ -92,7 +92,6 @@ public class TestJoueur {
 		System.out.println("appliquer "+ feuVert + ":" + feuVert.appliquer(joueur5));
 		System.out.println("appliquer "+ feuVert + ":" + feuVert.appliquer(joueur5));
 		System.out.println("appliquer "+ feuRouge + ":" + feuRouge.appliquer(joueur5));
-		System.out.println(joueur5.getLimite());
 		System.out.println("appliquer "+ feuRouge + ":" + feuRouge.appliquer(joueur5));
 		Borne borne100 = new Borne(100,1);
 		System.out.println("appliquer "+ borne100 + ":" + borne100.appliquer(joueur5));
@@ -103,6 +102,7 @@ public class TestJoueur {
 		//Debut Limite
 		DebutLimite limite = new DebutLimite(1);
 		System.out.println("appliquer "+ limite + ":" + limite.appliquer(joueur5));
+		System.out.println(joueur5.getLimite());
 		//Panne Essence
 		System.out.println("appliquer "+ panne + ":" + panne.appliquer(joueur5));
 		System.out.println("appliquer "+ borne100 + ":" + borne100.appliquer(joueur5));

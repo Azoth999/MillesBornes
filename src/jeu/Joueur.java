@@ -13,6 +13,7 @@ import cartes.Carte;
 import cartes.FinLimite;
 import cartes.Limite;
 import cartes.Parade;
+import cartes.Probleme.Type;
 
 public class Joueur {
 	private String nom;
@@ -110,7 +111,7 @@ public class Joueur {
 		}
 		//Il doit y avoir mieux
 		for(Botte b:botteList) {
-			if (b.toString().equals("Véhicule prioritaire")) {
+			if (botteList.stream().anyMatch(carte -> carte instanceof Botte && ((Botte) carte).getType() == Type.FEU)) {
 				return 200;
 			}
 		}
