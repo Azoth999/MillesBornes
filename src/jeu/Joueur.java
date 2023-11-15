@@ -22,6 +22,7 @@ public class Joueur {
 	private List<Botte> botteList;
 	private Stack<Limite> limitPile;
 	private Stack<Bataille> bataillePile;
+	private Jeu jeu;
 	
 	public Joueur(String nom) {
 		this.nom = nom;
@@ -33,7 +34,13 @@ public class Joueur {
 		this.bataillePile = new Stack<>();
 	}
 	
+	public Jeu getJeu() {
+		return jeu;
+	}
 	
+	public void setJeu(Jeu jeu) {
+		this.jeu = jeu;
+	}
 	
 	public String toString() {
 		return this.nom;
