@@ -76,7 +76,7 @@ public class Utils {
 		int index = 0;
 		ListIterator<?> listIteratorDebut = list1.listIterator();
 		ListIterator<?> listIteratorFin = list1.listIterator(indexFin);
-		while(listIteratorDebut.hasNext()) {
+		while(listIteratorDebut.hasNext() && listIteratorDebut.nextIndex()<indexFin) {
 			while(listIteratorDebut.next().equals(listIteratorDebut)) {
 				listIteratorDebut.next();
 			}

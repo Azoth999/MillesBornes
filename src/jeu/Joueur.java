@@ -89,7 +89,11 @@ public class Joueur {
 	}
 	
 	public int getKm() {
-		return this.km;
+		int kmBorne = 0;
+		for(Borne b:borneList) {
+			kmBorne += b.getKm();
+		}
+		return kmBorne;
 	}
 	
 	public boolean verifKm() {
