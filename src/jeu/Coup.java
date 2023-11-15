@@ -31,8 +31,6 @@ public class Coup {
 		return j.equals(joueur);
 	}
 	
-	public boolean jouer(Joueur j) {
-	}
 
 	@Override
 	public boolean equals(Object c) {

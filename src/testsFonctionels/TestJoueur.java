@@ -20,6 +20,12 @@ public class TestJoueur {
 		System.out.println(joueur1.getBorneList());
 		System.out.println(joueur1.getBotteList());
 		System.out.println(joueur1.getLimitePile());
+		System.out.println(joueur1.getKm());
+		System.out.println(joueur1.verifKm());
+		joueur1.ajouterBorne(20);
+		System.out.println(joueur1.verifKm());
+		
+		
 		
 		//Test toString equals joueurs
 		Joueur joueur2 = new Joueur("Joueur 2");
@@ -58,7 +64,7 @@ public class TestJoueur {
 		Botte citerne = new Botte(Type.ESSENCE,1);
 		Parade feuVert = new Parade(Type.FEU,1);
 		
-		System.out.println("\nVérification est bloqué");
+		System.out.println("\nVérification de estBloque");
 		joueur4.getBataillePile().add(feuRouge);
 		System.out.println(joueur4.estBloque());
 		joueur4.getBotteList().add(prioritaire);
@@ -79,13 +85,14 @@ public class TestJoueur {
 		System.out.println(joueur4.estBloque());
 		joueur4.getBataillePile().add(feuVert);
 		System.out.println(joueur4.estBloque());
-		
+				
 		//Tests TP4
 		System.out.println("\nTP4");
 		Joueur joueur5 = new Joueur("Joueur 5");
 		System.out.println("appliquer "+ feuVert + ":" + feuVert.appliquer(joueur5));
 		System.out.println("appliquer "+ feuVert + ":" + feuVert.appliquer(joueur5));
 		System.out.println("appliquer "+ feuRouge + ":" + feuRouge.appliquer(joueur5));
+		System.out.println(joueur5.getLimite());
 		System.out.println("appliquer "+ feuRouge + ":" + feuRouge.appliquer(joueur5));
 		Borne borne100 = new Borne(100,1);
 		System.out.println("appliquer "+ borne100 + ":" + borne100.appliquer(joueur5));
